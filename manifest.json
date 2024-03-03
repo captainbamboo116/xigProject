@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "TwitterXScraper",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "identity",
+    "tabs"
+  ],
+  "platforms": {
+    "browser": [
+      "chrome",
+      "edge"
+    ]
+  },
+  "oauth2": {
+    "scopes": ["https://www.googleapis.com/auth/spreadsheets"],
+    "client_id":"826505572344-i2bdovr4tcjf1fk5sk8g6e376tvgj3sd.apps.googleusercontent.com",
+    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+    "token_uri":"https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+    "redirect_uri": "chrome-extension://efnffalkciejabjgeecgjimacfjkjlnm/"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.twitter.com/*", "https://*.instagram.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["service-account-key.json", "controlPanel.html", "selectors.json"],
+      "matches": ["https://*.twitter.com/*", "https://*.instagram.com/*"]
+    }
+]
+}
